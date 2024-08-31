@@ -28,6 +28,7 @@ button {
     font-weight: bold;
     font-size: 18px;  
     color: purple;
+    cursor: pointer;
 }
 .grid {
     width: 600px;
@@ -35,7 +36,7 @@ button {
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    border: solid 4px darkgoldenrod;
+    border: solid 1px darkgoldenrod;
 }
 .row {
     display: flex;
@@ -45,4 +46,8 @@ button {
     flex: 1;
     border: solid #000 0.1px;
     background-color: #fff;
+}
+#rainbow.active, #eraser.active {
+    background-color: #fff;
+    color: #000;
 }
