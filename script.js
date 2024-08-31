@@ -5,29 +5,53 @@ document.addEventListener("DOMContentLoaded", function() {
     // taking the grid div for etching grids
     const grid = document.querySelector(".grid");
     // getting the height and width of the grid div
-    gridHeight = grid.offsetHeight;
-    gridWidth = grid.offsetWidth;
+    let gridHeight = grid.offsetHeight;
+    let gridWidth = grid.offsetWidth;
     console.log(gridHeight);
     console.log(gridWidth);
-    let squareHeight = (gridHeight / rows).toFixed(2);
+    // creating the default grid with 16x16 squares
+    createGrid(rows, gridHeight, gridWidth)
+    // the button for changing the number of grids
+    const changeGridButton = document.querySelector("#changeGrid");
+    changeGridButton.addEventListener("click", ChangeGrid);
+})
+
+// function for creating the grid
+function createGrid(numberOfRows, gridHeight, gridWidth) {
+    const grid = document.querySelector(".grid");
+    // grid.innerHTML = ""; // clear existing grid first
+    let squareHeight = (gridHeight / numberOfRows).toFixed(2);
     // creating all necessary grids
-    for(let i = 0; i < rows; i++)
+    for(let i = 0; i < numberOfRows; i++)
     {
         const newrow = document.createElement("div");
-        newrow.style.width = gridWidth;
+        newrow.style.width = gridWidth + "px";
         newrow.classList.add("row");
-        for(let j = 0; j < rows; j++)
+        for(let j = 0; j < numberOfRows; j++)
         {
             const newsquare = document.createElement("div");
             // the squares have the same height and width
-            newsquare.style.height = squareHeight;
-            newsquare.style.width = squareHeight;
+            newsquare.style.height = squareHeight + "px";
+            newsquare.style.width = squareHeight + "px";
             newsquare.classList.add("square");
             newrow.appendChild(newsquare);
         }
         grid.appendChild(newrow);
     }
-})
-function changeGrid() {
-    // it will be made
+}
+function ChangeGrid() {
+    let gridsNumber = parseInt(prompt("Choose the number of grids"));
+    // verifying that the user prompted a value between 1 and 100
+    if(gridsNumber >= 1 && gridsNumber <= 100) {
+        // empty the current grid for creating a new one
+        const grid = document.querySelector(".grid");
+        grid.innerHTML = "";
+        let gridHeight = grid.offsetHeight;
+        let gridWidth = grid.offsetWidth;
+        createGrid(gridsNumber, gridHeight, gridWidth);
+    }
+    else {
+        alert("You need to enter a value between 1 and 100");
+        ChangeGrid();
+    }
 }
